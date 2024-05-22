@@ -2,7 +2,7 @@
   "name": "evosoftcz/chilkat-php-extension",
   "description": "Versioned Package for Chilkat PHP 8.1+ Library",
   "require": {
-    "php": ">=8.1"
+    "php": ">=8.3"
   },
   "authors": [
     {
