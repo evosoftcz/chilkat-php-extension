@@ -12,16 +12,17 @@
 
 // Try to load our extension if it's not already loaded.
 if (!extension_loaded('chilkat_9_5_0')) {
-  if (strtolower(substr(PHP_OS, 0, 3)) === 'win') {
-    if (!dl('php_chilkat_9_5_0.dll')) return;
-  } else {
-    // PHP_SHLIB_SUFFIX gives 'dylib' on MacOS X but modules are 'so'.
-    if (PHP_SHLIB_SUFFIX === 'dylib') {
-      if (!dl('chilkat_9_5_0.so')) return;
-    } else {
-      if (!dl('chilkat_9_5_0.'.PHP_SHLIB_SUFFIX)) return;
-    }
-  }
+    throw new Exception('Chilkat extension is not loaded.');
+    //  if (strtolower(substr(PHP_OS, 0, 3)) === 'win') {
+    //    if (!dl('php_chilkat_9_5_0.dll')) return;
+    //  } else {
+    //    // PHP_SHLIB_SUFFIX gives 'dylib' on MacOS X but modules are 'so'.
+    //    if (PHP_SHLIB_SUFFIX === 'dylib') {
+    //      if (!dl('chilkat_9_5_0.so')) return;
+    //    } else {
+    //      if (!dl('chilkat_9_5_0.'.PHP_SHLIB_SUFFIX)) return;
+    //    }
+    //  }
 }
 
 
