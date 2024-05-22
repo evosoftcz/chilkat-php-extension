@@ -106,14 +106,6 @@ class CkSFtpProgress extends CkBaseProgress {
 		}
 		$this->_cPtr=new_CkSFtpProgress();
 	}
-
-	function UploadRate($byteCount,$bytesPerSec) {
-		CkSFtpProgress_UploadRate($this->_cPtr,$byteCount,$bytesPerSec);
-	}
-
-	function DownloadRate($byteCount,$bytesPerSec) {
-		CkSFtpProgress_DownloadRate($this->_cPtr,$byteCount,$bytesPerSec);
-	}
 }
 
 class CkMailManProgress extends CkBaseProgress {
@@ -196,14 +188,6 @@ class CkHttpProgress extends CkBaseProgress {
 	function HttpEndSend($success) {
 		CkHttpProgress_HttpEndSend($this->_cPtr,$success);
 	}
-
-	function ReceiveRate($byteCount,$bytesPerSec) {
-		CkHttpProgress_ReceiveRate($this->_cPtr,$byteCount,$bytesPerSec);
-	}
-
-	function SendRate($byteCount,$bytesPerSec) {
-		CkHttpProgress_SendRate($this->_cPtr,$byteCount,$bytesPerSec);
-	}
 }
 
 class CkFtp2Progress extends CkBaseProgress {
@@ -255,22 +239,6 @@ class CkFtp2Progress extends CkBaseProgress {
 	function VerifyDeleteFile($pathUtf8) {
 		return CkFtp2Progress_VerifyDeleteFile($this->_cPtr,$pathUtf8);
 	}
-
-	function EndUploadFile($pathUtf8,$numBytes) {
-		CkFtp2Progress_EndUploadFile($this->_cPtr,$pathUtf8,$numBytes);
-	}
-
-	function EndDownloadFile($pathUtf8,$numBytes) {
-		CkFtp2Progress_EndDownloadFile($this->_cPtr,$pathUtf8,$numBytes);
-	}
-
-	function UploadRate($byteCount,$bytesPerSec) {
-		CkFtp2Progress_UploadRate($this->_cPtr,$byteCount,$bytesPerSec);
-	}
-
-	function DownloadRate($byteCount,$bytesPerSec) {
-		CkFtp2Progress_DownloadRate($this->_cPtr,$byteCount,$bytesPerSec);
-	}
 }
 
 class CkZipProgress extends CkBaseProgress {
@@ -301,34 +269,6 @@ class CkZipProgress extends CkBaseProgress {
 
 	function DirToBeAdded($filePath) {
 		return CkZipProgress_DirToBeAdded($this->_cPtr,$filePath);
-	}
-
-	function ToBeAdded($filePath,$fileSize) {
-		return CkZipProgress_ToBeAdded($this->_cPtr,$filePath,$fileSize);
-	}
-
-	function FileAdded($filePath,$fileSize) {
-		return CkZipProgress_FileAdded($this->_cPtr,$filePath,$fileSize);
-	}
-
-	function ToBeZipped($filePath,$fileSize) {
-		return CkZipProgress_ToBeZipped($this->_cPtr,$filePath,$fileSize);
-	}
-
-	function FileZipped($filePath,$fileSize,$compressedSize) {
-		return CkZipProgress_FileZipped($this->_cPtr,$filePath,$fileSize,$compressedSize);
-	}
-
-	function ToBeUnzipped($filePath,$compressedSize,$fileSize,$isDirectory) {
-		return CkZipProgress_ToBeUnzipped($this->_cPtr,$filePath,$compressedSize,$fileSize,$isDirectory);
-	}
-
-	function FileUnzipped($filePath,$compressedSize,$fileSize,$isDirectory) {
-		return CkZipProgress_FileUnzipped($this->_cPtr,$filePath,$compressedSize,$fileSize,$isDirectory);
-	}
-
-	function SkippedForUnzip($filePath,$compressedSize,$fileSize,$isDirectory) {
-		CkZipProgress_SkippedForUnzip($this->_cPtr,$filePath,$compressedSize,$fileSize,$isDirectory);
 	}
 
 	function AddFilesBegin() {
@@ -380,10 +320,6 @@ class CkTarProgress extends CkBaseProgress {
 			return;
 		}
 		$this->_cPtr=new_CkTarProgress();
-	}
-
-	function NextTarFile($path,$fileSize,$bIsDirectory) {
-		return CkTarProgress_NextTarFile($this->_cPtr,$path,$fileSize,$bIsDirectory);
 	}
 }
 
@@ -889,10 +825,6 @@ class CkDateTime {
 		return CkDateTime_GetAsUnixTimeInt($this->_cPtr,$bLocal);
 	}
 
-	function GetAsUnixTime64($bLocal) {
-		return CkDateTime_GetAsUnixTime64($this->_cPtr,$bLocal);
-	}
-
 	function GetAsOleDate($bLocal) {
 		return CkDateTime_GetAsOleDate($this->_cPtr,$bLocal);
 	}
@@ -901,24 +833,12 @@ class CkDateTime {
 		return CkDateTime_GetAsDosDate($this->_cPtr,$bLocal);
 	}
 
-	function GetAsDateTimeTicks($bLocal) {
-		return CkDateTime_GetAsDateTimeTicks($this->_cPtr,$bLocal);
-	}
-
-	function SetFromUnixTime64($bLocal,$t) {
-		CkDateTime_SetFromUnixTime64($this->_cPtr,$bLocal,$t);
-	}
-
 	function SetFromOleDate($bLocal,$dt) {
 		CkDateTime_SetFromOleDate($this->_cPtr,$bLocal,$dt);
 	}
 
 	function SetFromDosDate($bLocal,$t) {
 		CkDateTime_SetFromDosDate($this->_cPtr,$bLocal,$t);
-	}
-
-	function SetFromDateTimeTicks($bLocal,$n) {
-		CkDateTime_SetFromDateTimeTicks($this->_cPtr,$bLocal,$n);
 	}
 
 	function serialize() {
@@ -997,6 +917,10 @@ class CkDateTime {
 
 	function SetFromTimestamp($rfc3339Str) {
 		return CkDateTime_SetFromTimestamp($this->_cPtr,$rfc3339Str);
+	}
+
+	function SetFromNtpServer($jsonNtpInfo) {
+		return CkDateTime_SetFromNtpServer($this->_cPtr,$jsonNtpInfo);
 	}
 }
 
@@ -3857,6 +3781,10 @@ class CkCert {
 		CkCert_put_Utf8($this->_cPtr,$b);
 	}
 
+	function put_EventCallbackObject($progress) {
+		CkCert_put_EventCallbackObject($this->_cPtr,$progress);
+	}
+
 	function get_AuthorityKeyId($str) {
 		CkCert_get_AuthorityKeyId($this->_cPtr,$str);
 	}
@@ -4373,6 +4301,10 @@ class CkCert {
 		return CkCert_extensionAsXml($this->_cPtr,$oid);
 	}
 
+	function GetExtensionBd($oid,$bd) {
+		return CkCert_GetExtensionBd($this->_cPtr,$oid,$bd);
+	}
+
 	function getPrivateKeyPem() {
 		return CkCert_getPrivateKeyPem($this->_cPtr);
 	}
@@ -4431,6 +4363,10 @@ class CkCert {
 
 	function HasPrivateKey() {
 		return CkCert_HasPrivateKey($this->_cPtr);
+	}
+
+	function LinkPkcs11($session) {
+		return CkCert_LinkPkcs11($this->_cPtr,$session);
 	}
 
 	function LoadByCommonName($cn) {
@@ -4505,6 +4441,10 @@ class CkCert {
 		return CkCert_SaveToFile($this->_cPtr,$path);
 	}
 
+	function SetCloudSigner($json) {
+		return CkCert_SetCloudSigner($this->_cPtr,$json);
+	}
+
 	function SetFromEncoded($encodedCert) {
 		return CkCert_SetFromEncoded($this->_cPtr,$encodedCert);
 	}
@@ -4515,6 +4455,20 @@ class CkCert {
 
 	function SetPrivateKeyPem($privKeyPem) {
 		return CkCert_SetPrivateKeyPem($this->_cPtr,$privKeyPem);
+	}
+
+	function UploadToCloud($jsonIn,$jsonOut) {
+		return CkCert_UploadToCloud($this->_cPtr,$jsonIn,$jsonOut);
+	}
+
+	function UploadToCloudAsync($jsonIn,$jsonOut) {
+		$r=CkCert_UploadToCloudAsync($this->_cPtr,$jsonIn,$jsonOut);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function UseCertVault($vault) {
@@ -4619,6 +4573,18 @@ class CkCertChain {
 
 	function get_ReachesRoot() {
 		return CkCertChain_get_ReachesRoot($this->_cPtr);
+	}
+
+	function get_UncommonOptions($str) {
+		CkCertChain_get_UncommonOptions($this->_cPtr,$str);
+	}
+
+	function uncommonOptions() {
+		return CkCertChain_uncommonOptions($this->_cPtr);
+	}
+
+	function put_UncommonOptions($newVal) {
+		CkCertChain_put_UncommonOptions($this->_cPtr,$newVal);
 	}
 
 	function get_VerboseLogging() {
@@ -4759,6 +4725,10 @@ class CkCertStore {
 		return CkCertStore_get_NumCertificates($this->_cPtr);
 	}
 
+	function get_NumEmailCerts() {
+		return CkCertStore_get_NumEmailCerts($this->_cPtr);
+	}
+
 	function get_SmartCardPin($str) {
 		CkCertStore_get_SmartCardPin($this->_cPtr,$str);
 	}
@@ -4797,6 +4767,26 @@ class CkCertStore {
 
 	function version() {
 		return CkCertStore_version($this->_cPtr);
+	}
+
+	function AddCertificate($cert) {
+		return CkCertStore_AddCertificate($this->_cPtr,$cert);
+	}
+
+	function CloseCertStore() {
+		return CkCertStore_CloseCertStore($this->_cPtr);
+	}
+
+	function CreateFileStore($filename) {
+		return CkCertStore_CreateFileStore($this->_cPtr,$filename);
+	}
+
+	function CreateMemoryStore() {
+		return CkCertStore_CreateMemoryStore($this->_cPtr);
+	}
+
+	function CreateRegistryStore($regRoot,$regPath) {
+		return CkCertStore_CreateRegistryStore($this->_cPtr,$regRoot,$regPath);
 	}
 
 	function FindCertByKeyContainer($name) {
@@ -4899,6 +4889,16 @@ class CkCertStore {
 		return $r;
 	}
 
+	function GetEmailCert($index) {
+		$r=CkCertStore_GetEmailCert($this->_cPtr,$index);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCert($r);
+		}
+		return $r;
+	}
+
 	function LoadPemFile($pemPath) {
 		return CkCertStore_LoadPemFile($this->_cPtr,$pemPath);
 	}
@@ -4913,6 +4913,34 @@ class CkCertStore {
 
 	function LoadPfxFile($pfxFilename,$password) {
 		return CkCertStore_LoadPfxFile($this->_cPtr,$pfxFilename,$password);
+	}
+
+	function OpenCurrentUserStore($readOnly) {
+		return CkCertStore_OpenCurrentUserStore($this->_cPtr,$readOnly);
+	}
+
+	function OpenFileStore($filename,$readOnly) {
+		return CkCertStore_OpenFileStore($this->_cPtr,$filename,$readOnly);
+	}
+
+	function OpenLocalSystemStore($readOnly) {
+		return CkCertStore_OpenLocalSystemStore($this->_cPtr,$readOnly);
+	}
+
+	function OpenRegistryStore($regRoot,$regPath,$readOnly) {
+		return CkCertStore_OpenRegistryStore($this->_cPtr,$regRoot,$regPath,$readOnly);
+	}
+
+	function OpenSmartcard($csp) {
+		return CkCertStore_OpenSmartcard($this->_cPtr,$csp);
+	}
+
+	function OpenWindowsStore($storeLocation,$storeName,$readOnly) {
+		return CkCertStore_OpenWindowsStore($this->_cPtr,$storeLocation,$storeName,$readOnly);
+	}
+
+	function RemoveCertificate($cert) {
+		return CkCertStore_RemoveCertificate($this->_cPtr,$cert);
 	}
 
 	function SaveLastError($path) {
@@ -6471,8 +6499,16 @@ class CkCrypt2 {
 		return CkCrypt2_aesKeyUnwrap($this->_cPtr,$kek,$wrappedKeyData,$encoding);
 	}
 
+	function aesKeyUnwrapWithPadding($kek,$wrappedKeyData,$encoding) {
+		return CkCrypt2_aesKeyUnwrapWithPadding($this->_cPtr,$kek,$wrappedKeyData,$encoding);
+	}
+
 	function aesKeyWrap($kek,$keyData,$encoding) {
 		return CkCrypt2_aesKeyWrap($this->_cPtr,$kek,$keyData,$encoding);
+	}
+
+	function aesKeyWrapWithPadding($kek,$keyData,$encoding) {
+		return CkCrypt2_aesKeyWrapWithPadding($this->_cPtr,$kek,$keyData,$encoding);
 	}
 
 	function bCryptHash($password) {
@@ -8941,6 +8977,14 @@ class CkEcc {
 		CkEcc_put_Utf8($this->_cPtr,$b);
 	}
 
+	function get_AsnFormat() {
+		return CkEcc_get_AsnFormat($this->_cPtr);
+	}
+
+	function put_AsnFormat($newVal) {
+		CkEcc_put_AsnFormat($this->_cPtr,$newVal);
+	}
+
 	function get_DebugLogFilePath($str) {
 		CkEcc_get_DebugLogFilePath($this->_cPtr,$str);
 	}
@@ -10315,6 +10359,18 @@ class CkEmail {
 		return CkEmail_GetNthBinaryPartOfType($this->_cPtr,$index,$contentType,$inlineOnly,$excludeAttachments,$outBytes);
 	}
 
+	function GetNthBinaryPartOfTypeBd($index,$contentType,$inlineOnly,$excludeAttachments,$bd) {
+		return CkEmail_GetNthBinaryPartOfTypeBd($this->_cPtr,$index,$contentType,$inlineOnly,$excludeAttachments,$bd);
+	}
+
+	function getNthContentType($index,$contentType,$inlineOnly,$excludeAttachments) {
+		return CkEmail_getNthContentType($this->_cPtr,$index,$contentType,$inlineOnly,$excludeAttachments);
+	}
+
+	function nthContentType($index,$contentType,$inlineOnly,$excludeAttachments) {
+		return CkEmail_nthContentType($this->_cPtr,$index,$contentType,$inlineOnly,$excludeAttachments);
+	}
+
 	function getNthTextPartOfType($index,$contentType,$inlineOnly,$excludeAttachments) {
 		return CkEmail_getNthTextPartOfType($this->_cPtr,$index,$contentType,$inlineOnly,$excludeAttachments);
 	}
@@ -11093,10 +11149,6 @@ class CkFileAccess {
 
 	function FileSize($filePath) {
 		return CkFileAccess_FileSize($this->_cPtr,$filePath);
-	}
-
-	function FileSize64($filePath) {
-		return CkFileAccess_FileSize64($this->_cPtr,$filePath);
 	}
 
 	function fileSizeStr($filePath) {
@@ -12909,8 +12961,14 @@ class CkFtp2 {
 		return $r;
 	}
 
-	function GetSize64($index) {
-		return CkFtp2_GetSize64($this->_cPtr,$index);
+	function GetSize64Async($index) {
+		$r=CkFtp2_GetSize64Async($this->_cPtr,$index);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function GetSizeByName($filename) {
@@ -12927,8 +12985,14 @@ class CkFtp2 {
 		return $r;
 	}
 
-	function GetSizeByName64($filename) {
-		return CkFtp2_GetSizeByName64($this->_cPtr,$filename);
+	function GetSizeByName64Async($filename) {
+		$r=CkFtp2_GetSizeByName64Async($this->_cPtr,$filename);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function getSizeStr($index) {
@@ -14223,6 +14287,10 @@ class CkHashtable {
 		CkHashtable_put_Utf8($this->_cPtr,$b);
 	}
 
+	function get_Count() {
+		return CkHashtable_get_Count($this->_cPtr);
+	}
+
 	function get_LastMethodSuccess() {
 		return CkHashtable_get_LastMethodSuccess($this->_cPtr);
 	}
@@ -14419,6 +14487,10 @@ class CkHtmlToText {
 		return CkHtmlToText_toText($this->_cPtr,$html);
 	}
 
+	function ToTextSb($sb) {
+		return CkHtmlToText_ToTextSb($this->_cPtr,$sb);
+	}
+
 	function UnlockComponent($code) {
 		return CkHtmlToText_UnlockComponent($this->_cPtr,$code);
 	}
@@ -14601,6 +14673,10 @@ class CkHtmlToXml {
 
 	function SetHtmlFromFile($filename) {
 		return CkHtmlToXml_SetHtmlFromFile($this->_cPtr,$filename);
+	}
+
+	function SetHtmlSb($sb) {
+		return CkHtmlToXml_SetHtmlSb($this->_cPtr,$sb);
 	}
 
 	function toXml() {
@@ -14813,6 +14889,18 @@ class CkHttp {
 
 	function put_AwsSecretKey($newVal) {
 		CkHttp_put_AwsSecretKey($this->_cPtr,$newVal);
+	}
+
+	function get_AwsSessionToken($str) {
+		CkHttp_get_AwsSessionToken($this->_cPtr,$str);
+	}
+
+	function awsSessionToken() {
+		return CkHttp_awsSessionToken($this->_cPtr);
+	}
+
+	function put_AwsSessionToken($newVal) {
+		CkHttp_put_AwsSessionToken($this->_cPtr,$newVal);
 	}
 
 	function get_AwsSignatureVersion() {
@@ -16647,6 +16735,10 @@ class CkHttp {
 
 	function SetAuthPrivateKey($publicKeyId,$privKey) {
 		return CkHttp_SetAuthPrivateKey($this->_cPtr,$publicKeyId,$privKey);
+	}
+
+	function SetAuthTokenSb($sb) {
+		return CkHttp_SetAuthTokenSb($this->_cPtr,$sb);
 	}
 
 	function SetCookieXml($domain,$cookieXml) {
@@ -19759,6 +19851,10 @@ class CkJsonArray {
 		return CkJsonArray_AddStringAt($this->_cPtr,$index,$value);
 	}
 
+	function AddUIntAt($index,$value) {
+		return CkJsonArray_AddUIntAt($this->_cPtr,$index,$value);
+	}
+
 	function AppendArrayItems($jarr) {
 		return CkJsonArray_AppendArrayItems($this->_cPtr,$jarr);
 	}
@@ -19859,6 +19955,10 @@ class CkJsonArray {
 		return CkJsonArray_SetStringAt($this->_cPtr,$index,$value);
 	}
 
+	function SetUIntAt($index,$value) {
+		return CkJsonArray_SetUIntAt($this->_cPtr,$index,$value);
+	}
+
 	function stringAt($index) {
 		return CkJsonArray_stringAt($this->_cPtr,$index);
 	}
@@ -19869,6 +19969,10 @@ class CkJsonArray {
 
 	function TypeAt($index) {
 		return CkJsonArray_TypeAt($this->_cPtr,$index);
+	}
+
+	function UIntAt($index) {
+		return CkJsonArray_UIntAt($this->_cPtr,$index);
 	}
 }
 
@@ -20407,6 +20511,10 @@ class CkJsonObject {
 		return CkJsonObject_stringOf($this->_cPtr,$jsonPath);
 	}
 
+	function StringOfEquals($jsonPath,$value,$caseSensitive) {
+		return CkJsonObject_StringOfEquals($this->_cPtr,$jsonPath,$value,$caseSensitive);
+	}
+
 	function StringOfSb($jsonPath,$sb) {
 		return CkJsonObject_StringOfSb($this->_cPtr,$jsonPath,$sb);
 	}
@@ -20417,6 +20525,10 @@ class CkJsonObject {
 
 	function TypeAt($index) {
 		return CkJsonObject_TypeAt($this->_cPtr,$index);
+	}
+
+	function UIntOf($jsonPath) {
+		return CkJsonObject_UIntOf($this->_cPtr,$jsonPath);
 	}
 
 	function UpdateBd($jsonPath,$encoding,$bd) {
@@ -20453,6 +20565,10 @@ class CkJsonObject {
 
 	function UpdateString($jsonPath,$value) {
 		return CkJsonObject_UpdateString($this->_cPtr,$jsonPath,$value);
+	}
+
+	function UpdateUInt($jsonPath,$value) {
+		return CkJsonObject_UpdateUInt($this->_cPtr,$jsonPath,$value);
 	}
 
 	function WriteFile($path) {
@@ -21159,10 +21275,6 @@ class CkLog {
 		CkLog_LogInt($this->_cPtr,$tag,$value);
 	}
 
-	function LogInt64($tag,$value) {
-		CkLog_LogInt64($this->_cPtr,$tag,$value);
-	}
-
 	function LogTimestamp($tag) {
 		CkLog_LogTimestamp($this->_cPtr,$tag);
 	}
@@ -21593,6 +21705,14 @@ class CkMailMan {
 
 	function put_LastMethodSuccess($newVal) {
 		CkMailMan_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_LastSendQFilename($str) {
+		CkMailMan_get_LastSendQFilename($this->_cPtr,$str);
+	}
+
+	function lastSendQFilename() {
+		return CkMailMan_lastSendQFilename($this->_cPtr);
 	}
 
 	function get_LastSmtpStatus() {
@@ -22697,6 +22817,16 @@ class CkMailMan {
 		return $r;
 	}
 
+	function LoadQueuedEmail($path) {
+		$r=CkMailMan_LoadQueuedEmail($this->_cPtr,$path);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkEmail($r);
+		}
+		return $r;
+	}
+
 	function LoadTaskCaller($task) {
 		return CkMailMan_LoadTaskCaller($this->_cPtr,$task);
 	}
@@ -22985,6 +23115,14 @@ class CkMailMan {
 		return $r;
 	}
 
+	function SendMimeBytesQ($from,$recipients,$mimeData) {
+		return CkMailMan_SendMimeBytesQ($this->_cPtr,$from,$recipients,$mimeData);
+	}
+
+	function SendMimeQ($fromAddr,$recipients,$mimeSource) {
+		return CkMailMan_SendMimeQ($this->_cPtr,$fromAddr,$recipients,$mimeSource);
+	}
+
 	function SendMimeToList($fromAddr,$distListFilename,$mimeSource) {
 		return CkMailMan_SendMimeToList($this->_cPtr,$fromAddr,$distListFilename,$mimeSource);
 	}
@@ -22997,6 +23135,14 @@ class CkMailMan {
 			return new CkTask($r);
 		}
 		return $r;
+	}
+
+	function SendQ($email) {
+		return CkMailMan_SendQ($this->_cPtr,$email);
+	}
+
+	function SendQ2($email,$queueDir) {
+		return CkMailMan_SendQ2($this->_cPtr,$email,$queueDir);
 	}
 
 	function SendToDistributionList($emailObj,$recipientList) {
@@ -25723,6 +25869,10 @@ class CkOAuth2 {
 		CkOAuth2_put_ListenPortRangeEnd($this->_cPtr,$newVal);
 	}
 
+	function get_ListenPortSelected() {
+		return CkOAuth2_get_ListenPortSelected($this->_cPtr);
+	}
+
 	function get_LocalHost($str) {
 		CkOAuth2_get_LocalHost($this->_cPtr,$str);
 	}
@@ -25835,6 +25985,18 @@ class CkOAuth2 {
 		CkOAuth2_put_Scope($this->_cPtr,$newVal);
 	}
 
+	function get_StateParam($str) {
+		CkOAuth2_get_StateParam($this->_cPtr,$str);
+	}
+
+	function stateParam() {
+		return CkOAuth2_stateParam($this->_cPtr);
+	}
+
+	function put_StateParam($newVal) {
+		CkOAuth2_put_StateParam($this->_cPtr,$newVal);
+	}
+
 	function get_TokenEndpoint($str) {
 		CkOAuth2_get_TokenEndpoint($this->_cPtr,$str);
 	}
@@ -25897,6 +26059,10 @@ class CkOAuth2 {
 
 	function AddAuthQueryParam($name,$value) {
 		return CkOAuth2_AddAuthQueryParam($this->_cPtr,$name,$value);
+	}
+
+	function AddRefreshQueryParam($name,$value) {
+		return CkOAuth2_AddRefreshQueryParam($this->_cPtr,$name,$value);
 	}
 
 	function AddTokenQueryParam($name,$value) {
@@ -26497,6 +26663,10 @@ class CkPfx {
 		return CkPfx_safeBagAttr($this->_cPtr,$forPrivateKey,$index,$attrName);
 	}
 
+	function ImportToWindows($exportable,$userProtected,$machineKeyset,$allowOverwriteKey,$allowExport,$leafStore,$intermediateStore,$rootStore,$extraOptions) {
+		return CkPfx_ImportToWindows($this->_cPtr,$exportable,$userProtected,$machineKeyset,$allowOverwriteKey,$allowExport,$leafStore,$intermediateStore,$rootStore,$extraOptions);
+	}
+
 	function LastJsonData() {
 		$r=CkPfx_LastJsonData($this->_cPtr);
 		if (is_resource($r)) {
@@ -26601,6 +26771,10 @@ class CkPrivateKey {
 		CkPrivateKey_put_Utf8($this->_cPtr,$b);
 	}
 
+	function put_EventCallbackObject($progress) {
+		CkPrivateKey_put_EventCallbackObject($this->_cPtr,$progress);
+	}
+
 	function get_BitLength() {
 		return CkPrivateKey_get_BitLength($this->_cPtr);
 	}
@@ -26667,6 +26841,18 @@ class CkPrivateKey {
 
 	function put_Pkcs8EncryptAlg($newVal) {
 		CkPrivateKey_put_Pkcs8EncryptAlg($this->_cPtr,$newVal);
+	}
+
+	function get_UncommonOptions($str) {
+		CkPrivateKey_get_UncommonOptions($this->_cPtr,$str);
+	}
+
+	function uncommonOptions() {
+		return CkPrivateKey_uncommonOptions($this->_cPtr);
+	}
+
+	function put_UncommonOptions($newVal) {
+		CkPrivateKey_put_UncommonOptions($this->_cPtr,$newVal);
 	}
 
 	function get_VerboseLogging() {
@@ -26855,6 +27041,14 @@ class CkPrivateKey {
 		return CkPrivateKey_LoadPkcs8File($this->_cPtr,$path);
 	}
 
+	function LoadPvk($data,$password) {
+		return CkPrivateKey_LoadPvk($this->_cPtr,$data,$password);
+	}
+
+	function LoadPvkFile($path,$password) {
+		return CkPrivateKey_LoadPvkFile($this->_cPtr,$path,$password);
+	}
+
 	function LoadRsaDer($data) {
 		return CkPrivateKey_LoadRsaDer($this->_cPtr,$data);
 	}
@@ -26909,6 +27103,20 @@ class CkPrivateKey {
 
 	function SaveXmlFile($path) {
 		return CkPrivateKey_SaveXmlFile($this->_cPtr,$path);
+	}
+
+	function UploadToCloud($jsonIn,$jsonOut) {
+		return CkPrivateKey_UploadToCloud($this->_cPtr,$jsonIn,$jsonOut);
+	}
+
+	function UploadToCloudAsync($jsonIn,$jsonOut) {
+		$r=CkPrivateKey_UploadToCloudAsync($this->_cPtr,$jsonIn,$jsonOut);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 }
 
@@ -28277,6 +28485,18 @@ class CkRsa {
 
 	function put_OaepHash($newVal) {
 		CkRsa_put_OaepHash($this->_cPtr,$newVal);
+	}
+
+	function get_OaepLabel($str) {
+		CkRsa_get_OaepLabel($this->_cPtr,$str);
+	}
+
+	function oaepLabel() {
+		return CkRsa_oaepLabel($this->_cPtr);
+	}
+
+	function put_OaepLabel($newVal) {
+		CkRsa_put_OaepLabel($this->_cPtr,$newVal);
 	}
 
 	function get_OaepMgfHash($str) {
@@ -30493,8 +30713,24 @@ class CkSFtp {
 		return CkSFtp_GetFileSize32($this->_cPtr,$pathOrHandle,$bFollowLinks,$bIsHandle);
 	}
 
-	function GetFileSize64($pathOrHandle,$bFollowLinks,$bIsHandle) {
-		return CkSFtp_GetFileSize64($this->_cPtr,$pathOrHandle,$bFollowLinks,$bIsHandle);
+	function GetFileSize32Async($pathOrHandle,$bFollowLinks,$bIsHandle) {
+		$r=CkSFtp_GetFileSize32Async($this->_cPtr,$pathOrHandle,$bFollowLinks,$bIsHandle);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
+	function GetFileSize64Async($pathOrHandle,$bFollowLinks,$bIsHandle) {
+		$r=CkSFtp_GetFileSize64Async($this->_cPtr,$pathOrHandle,$bFollowLinks,$bIsHandle);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function getFileSizeStr($pathOrHandle,$bFollowLinks,$bIsHandle) {
@@ -30503,6 +30739,16 @@ class CkSFtp {
 
 	function fileSizeStr($pathOrHandle,$bFollowLinks,$bIsHandle) {
 		return CkSFtp_fileSizeStr($this->_cPtr,$pathOrHandle,$bFollowLinks,$bIsHandle);
+	}
+
+	function GetFileSizeStrAsync($pathOrHandle,$bFollowLinks,$bIsHandle) {
+		$r=CkSFtp_GetFileSizeStrAsync($this->_cPtr,$pathOrHandle,$bFollowLinks,$bIsHandle);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function getHostKeyFP($hashAlg,$includeKeyType,$includeHashName) {
@@ -30643,12 +30889,28 @@ class CkSFtp {
 		return CkSFtp_ReadFileBytes32($this->_cPtr,$handle,$offset,$numBytes,$outBytes);
 	}
 
-	function ReadFileBytes64($handle,$offset,$numBytes,$outBytes) {
-		return CkSFtp_ReadFileBytes64($this->_cPtr,$handle,$offset,$numBytes,$outBytes);
+	function ReadFileBytes32Async($handle,$offset,$numBytes) {
+		$r=CkSFtp_ReadFileBytes32Async($this->_cPtr,$handle,$offset,$numBytes);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function ReadFileBytes64s($handle,$offset,$numBytes,$outBytes) {
 		return CkSFtp_ReadFileBytes64s($this->_cPtr,$handle,$offset,$numBytes,$outBytes);
+	}
+
+	function ReadFileBytes64sAsync($handle,$offset,$numBytes) {
+		$r=CkSFtp_ReadFileBytes64sAsync($this->_cPtr,$handle,$offset,$numBytes);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function readFileText($handle,$numBytes,$charset) {
@@ -30669,12 +30931,28 @@ class CkSFtp {
 		return CkSFtp_readFileText32($this->_cPtr,$handle,$offset,$numBytes,$charset);
 	}
 
-	function readFileText64($handle,$offset,$numBytes,$charset) {
-		return CkSFtp_readFileText64($this->_cPtr,$handle,$offset,$numBytes,$charset);
+	function ReadFileText32Async($handle,$offset,$numBytes,$charset) {
+		$r=CkSFtp_ReadFileText32Async($this->_cPtr,$handle,$offset,$numBytes,$charset);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function readFileText64s($handle,$offset,$numBytes,$charset) {
 		return CkSFtp_readFileText64s($this->_cPtr,$handle,$offset,$numBytes,$charset);
+	}
+
+	function ReadFileText64sAsync($handle,$offset,$numBytes,$charset) {
+		$r=CkSFtp_ReadFileText64sAsync($this->_cPtr,$handle,$offset,$numBytes,$charset);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function readLink($path) {
@@ -31065,12 +31343,28 @@ class CkSFtp {
 		return CkSFtp_WriteFileBytes32($this->_cPtr,$handle,$offset,$data);
 	}
 
-	function WriteFileBytes64($handle,$offset64,$data) {
-		return CkSFtp_WriteFileBytes64($this->_cPtr,$handle,$offset64,$data);
+	function WriteFileBytes32Async($handle,$offset,$data) {
+		$r=CkSFtp_WriteFileBytes32Async($this->_cPtr,$handle,$offset,$data);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function WriteFileBytes64s($handle,$offset64,$data) {
 		return CkSFtp_WriteFileBytes64s($this->_cPtr,$handle,$offset64,$data);
+	}
+
+	function WriteFileBytes64sAsync($handle,$offset64,$data) {
+		$r=CkSFtp_WriteFileBytes64sAsync($this->_cPtr,$handle,$offset64,$data);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function WriteFileText($handle,$charset,$textData) {
@@ -31091,12 +31385,28 @@ class CkSFtp {
 		return CkSFtp_WriteFileText32($this->_cPtr,$handle,$offset32,$charset,$textData);
 	}
 
-	function WriteFileText64($handle,$offset64,$charset,$textData) {
-		return CkSFtp_WriteFileText64($this->_cPtr,$handle,$offset64,$charset,$textData);
+	function WriteFileText32Async($handle,$offset32,$charset,$textData) {
+		$r=CkSFtp_WriteFileText32Async($this->_cPtr,$handle,$offset32,$charset,$textData);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function WriteFileText64s($handle,$offset64,$charset,$textData) {
 		return CkSFtp_WriteFileText64s($this->_cPtr,$handle,$offset64,$charset,$textData);
+	}
+
+	function WriteFileText64sAsync($handle,$offset64,$charset,$textData) {
+		$r=CkSFtp_WriteFileText64sAsync($this->_cPtr,$handle,$offset64,$charset,$textData);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 }
 
@@ -31717,6 +32027,10 @@ class CkSocket {
 
 	function myIpAddress() {
 		return CkSocket_myIpAddress($this->_cPtr);
+	}
+
+	function get_NumBytesAvailable() {
+		return CkSocket_get_NumBytesAvailable($this->_cPtr);
 	}
 
 	function get_NumReceivedClientCerts() {
@@ -34788,6 +35102,10 @@ class CkSshKey {
 	function toXml() {
 		return CkSshKey_toXml($this->_cPtr);
 	}
+
+	function UsePkcs11($session,$privKeyHandle,$pubKeyHandle,$keyType) {
+		return CkSshKey_UsePkcs11($this->_cPtr,$session,$privKeyHandle,$pubKeyHandle,$keyType);
+	}
 }
 
 class CkSshTunnel {
@@ -34859,6 +35177,18 @@ class CkSshTunnel {
 
 	function put_AcceptLogPath($newVal) {
 		CkSshTunnel_put_AcceptLogPath($this->_cPtr,$newVal);
+	}
+
+	function get_ClientIdentifier($str) {
+		CkSshTunnel_get_ClientIdentifier($this->_cPtr,$str);
+	}
+
+	function clientIdentifier() {
+		return CkSshTunnel_clientIdentifier($this->_cPtr);
+	}
+
+	function put_ClientIdentifier($newVal) {
+		CkSshTunnel_put_ClientIdentifier($this->_cPtr,$newVal);
 	}
 
 	function get_ConnectTimeoutMs() {
@@ -35499,6 +35829,14 @@ class CkStream {
 
 	function get_EndOfStream() {
 		return CkStream_get_EndOfStream($this->_cPtr);
+	}
+
+	function get_HeartbeatMs() {
+		return CkStream_get_HeartbeatMs($this->_cPtr);
+	}
+
+	function put_HeartbeatMs($newVal) {
+		CkStream_put_HeartbeatMs($this->_cPtr,$newVal);
 	}
 
 	function get_IsWriteClosed() {
@@ -36237,12 +36575,12 @@ class CkStringBuilder {
 		return CkStringBuilder_AppendInt($this->_cPtr,$value);
 	}
 
-	function AppendInt64($value) {
-		return CkStringBuilder_AppendInt64($this->_cPtr,$value);
-	}
-
 	function AppendLine($value,$crlf) {
 		return CkStringBuilder_AppendLine($this->_cPtr,$value,$crlf);
+	}
+
+	function AppendRandom($numBytes,$encoding) {
+		return CkStringBuilder_AppendRandom($this->_cPtr,$numBytes,$encoding);
 	}
 
 	function AppendSb($sb) {
@@ -37221,6 +37559,10 @@ class CkTask {
 		CkTask_put_Utf8($this->_cPtr,$b);
 	}
 
+	function put_EventCallbackObject($progress) {
+		CkTask_put_EventCallbackObject($this->_cPtr,$progress);
+	}
+
 	function get_DebugLogFilePath($str) {
 		CkTask_get_DebugLogFilePath($this->_cPtr,$str);
 	}
@@ -37463,6 +37805,10 @@ class CkTaskChain {
 
 	function put_Utf8($b) {
 		CkTaskChain_put_Utf8($this->_cPtr,$b);
+	}
+
+	function put_EventCallbackObject($progress) {
+		CkTaskChain_put_EventCallbackObject($this->_cPtr,$progress);
 	}
 
 	function get_DebugLogFilePath($str) {
@@ -38669,6 +39015,14 @@ class CkWebSocket {
 
 	function get_FrameOpcodeInt() {
 		return CkWebSocket_get_FrameOpcodeInt($this->_cPtr);
+	}
+
+	function get_HeartbeatMs() {
+		return CkWebSocket_get_HeartbeatMs($this->_cPtr);
+	}
+
+	function put_HeartbeatMs($newVal) {
+		CkWebSocket_put_HeartbeatMs($this->_cPtr,$newVal);
 	}
 
 	function get_IdleTimeoutMs() {
@@ -40391,6 +40745,10 @@ class CkXmlDSigGen {
 		CkXmlDSigGen_put_Utf8($this->_cPtr,$b);
 	}
 
+	function put_EventCallbackObject($progress) {
+		CkXmlDSigGen_put_EventCallbackObject($this->_cPtr,$progress);
+	}
+
 	function get_Behaviors($str) {
 		CkXmlDSigGen_get_Behaviors($this->_cPtr,$str);
 	}
@@ -40739,8 +41097,28 @@ class CkXmlDSigGen {
 		return CkXmlDSigGen_createXmlDSig($this->_cPtr,$inXml);
 	}
 
+	function CreateXmlDSigAsync($inXml) {
+		$r=CkXmlDSigGen_CreateXmlDSigAsync($this->_cPtr,$inXml);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
 	function CreateXmlDSigSb($sbXml) {
 		return CkXmlDSigGen_CreateXmlDSigSb($this->_cPtr,$sbXml);
+	}
+
+	function CreateXmlDSigSbAsync($sbXml) {
+		$r=CkXmlDSigGen_CreateXmlDSigSbAsync($this->_cPtr,$sbXml);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function SaveLastError($path) {
@@ -41113,6 +41491,38 @@ class CkZip {
 		CkZip_put_AppendFromDir($this->_cPtr,$newVal);
 	}
 
+	function get_AutoRun($str) {
+		CkZip_get_AutoRun($this->_cPtr,$str);
+	}
+
+	function autoRun() {
+		return CkZip_autoRun($this->_cPtr);
+	}
+
+	function put_AutoRun($newVal) {
+		CkZip_put_AutoRun($this->_cPtr,$newVal);
+	}
+
+	function get_AutoRunParams($str) {
+		CkZip_get_AutoRunParams($this->_cPtr,$str);
+	}
+
+	function autoRunParams() {
+		return CkZip_autoRunParams($this->_cPtr);
+	}
+
+	function put_AutoRunParams($newVal) {
+		CkZip_put_AutoRunParams($this->_cPtr,$newVal);
+	}
+
+	function get_AutoTemp() {
+		return CkZip_get_AutoTemp($this->_cPtr);
+	}
+
+	function put_AutoTemp($newVal) {
+		CkZip_put_AutoTemp($this->_cPtr,$newVal);
+	}
+
 	function get_CaseSensitive() {
 		return CkZip_get_CaseSensitive($this->_cPtr);
 	}
@@ -41209,6 +41619,110 @@ class CkZip {
 		CkZip_put_EncryptPassword($this->_cPtr,$newVal);
 	}
 
+	function get_ExeDefaultDir($str) {
+		CkZip_get_ExeDefaultDir($this->_cPtr,$str);
+	}
+
+	function exeDefaultDir() {
+		return CkZip_exeDefaultDir($this->_cPtr);
+	}
+
+	function put_ExeDefaultDir($newVal) {
+		CkZip_put_ExeDefaultDir($this->_cPtr,$newVal);
+	}
+
+	function get_ExeFinishNotifier() {
+		return CkZip_get_ExeFinishNotifier($this->_cPtr);
+	}
+
+	function put_ExeFinishNotifier($newVal) {
+		CkZip_put_ExeFinishNotifier($this->_cPtr,$newVal);
+	}
+
+	function get_ExeIconFile($str) {
+		CkZip_get_ExeIconFile($this->_cPtr,$str);
+	}
+
+	function exeIconFile() {
+		return CkZip_exeIconFile($this->_cPtr);
+	}
+
+	function put_ExeIconFile($newVal) {
+		CkZip_put_ExeIconFile($this->_cPtr,$newVal);
+	}
+
+	function get_ExeNoInterface() {
+		return CkZip_get_ExeNoInterface($this->_cPtr);
+	}
+
+	function put_ExeNoInterface($newVal) {
+		CkZip_put_ExeNoInterface($this->_cPtr,$newVal);
+	}
+
+	function get_ExeSilentProgress() {
+		return CkZip_get_ExeSilentProgress($this->_cPtr);
+	}
+
+	function put_ExeSilentProgress($newVal) {
+		CkZip_put_ExeSilentProgress($this->_cPtr,$newVal);
+	}
+
+	function get_ExeTitle($str) {
+		CkZip_get_ExeTitle($this->_cPtr,$str);
+	}
+
+	function exeTitle() {
+		return CkZip_exeTitle($this->_cPtr);
+	}
+
+	function put_ExeTitle($newVal) {
+		CkZip_put_ExeTitle($this->_cPtr,$newVal);
+	}
+
+	function get_ExeUnzipCaption($str) {
+		CkZip_get_ExeUnzipCaption($this->_cPtr,$str);
+	}
+
+	function exeUnzipCaption() {
+		return CkZip_exeUnzipCaption($this->_cPtr);
+	}
+
+	function put_ExeUnzipCaption($newVal) {
+		CkZip_put_ExeUnzipCaption($this->_cPtr,$newVal);
+	}
+
+	function get_ExeUnzipDir($str) {
+		CkZip_get_ExeUnzipDir($this->_cPtr,$str);
+	}
+
+	function exeUnzipDir() {
+		return CkZip_exeUnzipDir($this->_cPtr);
+	}
+
+	function put_ExeUnzipDir($newVal) {
+		CkZip_put_ExeUnzipDir($this->_cPtr,$newVal);
+	}
+
+	function get_ExeWaitForSetup() {
+		return CkZip_get_ExeWaitForSetup($this->_cPtr);
+	}
+
+	function put_ExeWaitForSetup($newVal) {
+		CkZip_put_ExeWaitForSetup($this->_cPtr,$newVal);
+	}
+
+	function get_ExeXmlConfig($str) {
+		CkZip_get_ExeXmlConfig($this->_cPtr,$str);
+	}
+
+	function exeXmlConfig() {
+		return CkZip_exeXmlConfig($this->_cPtr);
+	}
+
+	function put_ExeXmlConfig($newVal) {
+		CkZip_put_ExeXmlConfig($this->_cPtr,$newVal);
+	}
+
 	function get_FileCount() {
 		return CkZip_get_FileCount($this->_cPtr);
 	}
@@ -41275,6 +41789,14 @@ class CkZip {
 
 	function put_LastMethodSuccess($newVal) {
 		CkZip_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_MaxUncompressSize() {
+		return CkZip_get_MaxUncompressSize($this->_cPtr);
+	}
+
+	function put_MaxUncompressSize($newVal) {
+		CkZip_put_MaxUncompressSize($this->_cPtr,$newVal);
 	}
 
 	function get_NumEntries() {
@@ -41403,6 +41925,10 @@ class CkZip {
 
 	function put_ZipxDefaultAlg($newVal) {
 		CkZip_put_ZipxDefaultAlg($this->_cPtr,$newVal);
+	}
+
+	function AddEmbedded($exeFilename,$resourceName,$zipFilename) {
+		return CkZip_AddEmbedded($this->_cPtr,$exeFilename,$resourceName,$zipFilename);
 	}
 
 	function AddNoCompressExtension($fileExtension) {
@@ -41595,20 +42121,74 @@ class CkZip {
 		return $r;
 	}
 
+	function ExtractExe($exePath,$dirPath) {
+		return CkZip_ExtractExe($this->_cPtr,$exePath,$dirPath);
+	}
+
+	function ExtractExeAsync($exePath,$dirPath) {
+		$r=CkZip_ExtractExeAsync($this->_cPtr,$exePath,$dirPath);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
 	function ExtractInto($dirPath) {
 		return CkZip_ExtractInto($this->_cPtr,$dirPath);
+	}
+
+	function ExtractIntoAsync($dirPath) {
+		$r=CkZip_ExtractIntoAsync($this->_cPtr,$dirPath);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function ExtractMatching($dirPath,$pattern) {
 		return CkZip_ExtractMatching($this->_cPtr,$dirPath,$pattern);
 	}
 
+	function ExtractMatchingAsync($dirPath,$pattern) {
+		$r=CkZip_ExtractMatchingAsync($this->_cPtr,$dirPath,$pattern);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
 	function ExtractNewer($dirPath) {
 		return CkZip_ExtractNewer($this->_cPtr,$dirPath);
 	}
 
+	function ExtractNewerAsync($dirPath) {
+		$r=CkZip_ExtractNewerAsync($this->_cPtr,$dirPath);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
 	function ExtractOne($entry,$dirPath) {
 		return CkZip_ExtractOne($this->_cPtr,$entry,$dirPath);
+	}
+
+	function ExtractOneAsync($entry,$dirPath) {
+		$r=CkZip_ExtractOneAsync($this->_cPtr,$entry,$dirPath);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
 	}
 
 	function FirstEntry() {
@@ -41679,6 +42259,22 @@ class CkZip {
 		return $r;
 	}
 
+	function getExeConfigParam($name) {
+		return CkZip_getExeConfigParam($this->_cPtr,$name);
+	}
+
+	function exeConfigParam($name) {
+		return CkZip_exeConfigParam($this->_cPtr,$name);
+	}
+
+	function getMaxUncompressedSize() {
+		return CkZip_getMaxUncompressedSize($this->_cPtr);
+	}
+
+	function maxUncompressedSize() {
+		return CkZip_maxUncompressedSize($this->_cPtr);
+	}
+
 	function InsertNew($fileName,$beforeIndex) {
 		$r=CkZip_InsertNew($this->_cPtr,$fileName,$beforeIndex);
 		if (is_resource($r)) {
@@ -41713,12 +42309,20 @@ class CkZip {
 		return CkZip_OpenBd($this->_cPtr,$binData);
 	}
 
+	function OpenEmbedded($exeFilename,$resourceName) {
+		return CkZip_OpenEmbedded($this->_cPtr,$exeFilename,$resourceName);
+	}
+
 	function OpenFromByteData($byteData) {
 		return CkZip_OpenFromByteData($this->_cPtr,$byteData);
 	}
 
 	function OpenFromMemory($inData) {
 		return CkZip_OpenFromMemory($this->_cPtr,$inData);
+	}
+
+	function OpenMyEmbedded($resourceName) {
+		return CkZip_OpenMyEmbedded($this->_cPtr,$resourceName);
 	}
 
 	function OpenZip($zipPath) {
@@ -41749,8 +42353,16 @@ class CkZip {
 		return $r;
 	}
 
+	function RemoveEmbedded($exeFilename,$resourceName) {
+		return CkZip_RemoveEmbedded($this->_cPtr,$exeFilename,$resourceName);
+	}
+
 	function RemoveNoCompressExtension($fileExtension) {
 		CkZip_RemoveNoCompressExtension($this->_cPtr,$fileExtension);
+	}
+
+	function ReplaceEmbedded($exeFilename,$resourceName,$zipFilename) {
+		return CkZip_ReplaceEmbedded($this->_cPtr,$exeFilename,$resourceName,$zipFilename);
 	}
 
 	function SaveLastError($path) {
@@ -41763,6 +42375,10 @@ class CkZip {
 
 	function SetExclusions($excludePatterns) {
 		CkZip_SetExclusions($this->_cPtr,$excludePatterns);
+	}
+
+	function SetExeConfigParam($paramName,$paramValue) {
+		CkZip_SetExeConfigParam($this->_cPtr,$paramName,$paramValue);
 	}
 
 	function SetPassword($password) {
@@ -41853,6 +42469,48 @@ class CkZip {
 
 	function WriteBdAsync($binData) {
 		$r=CkZip_WriteBdAsync($this->_cPtr,$binData);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
+	function WriteExe($exeFilename) {
+		return CkZip_WriteExe($this->_cPtr,$exeFilename);
+	}
+
+	function WriteExeAsync($exeFilename) {
+		$r=CkZip_WriteExeAsync($this->_cPtr,$exeFilename);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
+	function WriteExe2($exePath,$destExePath,$bAesEncrypt,$keyLength,$password) {
+		return CkZip_WriteExe2($this->_cPtr,$exePath,$destExePath,$bAesEncrypt,$keyLength,$password);
+	}
+
+	function WriteExe2Async($exePath,$destExePath,$bAesEncrypt,$keyLength,$password) {
+		$r=CkZip_WriteExe2Async($this->_cPtr,$exePath,$destExePath,$bAesEncrypt,$keyLength,$password);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
+	function WriteExeToMemory($outBytes) {
+		return CkZip_WriteExeToMemory($this->_cPtr,$outBytes);
+	}
+
+	function WriteExeToMemoryAsync() {
+		$r=CkZip_WriteExeToMemoryAsync($this->_cPtr);
 		if (is_resource($r)) {
 			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
 			if (class_exists($c)) return new $c($r);
@@ -42478,6 +43136,694 @@ class CkZipEntry {
 	}
 }
 
+class CkCsp {
+	public $_cPtr=null;
+	protected $_pData=array();
+
+	function __set($var,$value) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_alter_newobject($this->_cPtr,$value);
+		$this->_pData[$var] = $value;
+	}
+
+	function __get($var) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_get_newobject($this->_cPtr);
+		return $this->_pData[$var];
+	}
+
+	function __isset($var) {
+		if ($var === 'thisown') return true;
+		return array_key_exists($var, $this->_pData);
+	}
+
+	function __construct($res=null) {
+		if (is_resource($res) && get_resource_type($res) === '_p_CkCsp') {
+			$this->_cPtr=$res;
+			return;
+		}
+		$this->_cPtr=new_CkCsp();
+	}
+
+	function get_Utf8() {
+		return CkCsp_get_Utf8($this->_cPtr);
+	}
+
+	function put_Utf8($b) {
+		CkCsp_put_Utf8($this->_cPtr,$b);
+	}
+
+	function get_DebugLogFilePath($str) {
+		CkCsp_get_DebugLogFilePath($this->_cPtr,$str);
+	}
+
+	function debugLogFilePath() {
+		return CkCsp_debugLogFilePath($this->_cPtr);
+	}
+
+	function put_DebugLogFilePath($newVal) {
+		CkCsp_put_DebugLogFilePath($this->_cPtr,$newVal);
+	}
+
+	function get_EncryptAlgorithm($str) {
+		CkCsp_get_EncryptAlgorithm($this->_cPtr,$str);
+	}
+
+	function encryptAlgorithm() {
+		return CkCsp_encryptAlgorithm($this->_cPtr);
+	}
+
+	function get_EncryptAlgorithmID() {
+		return CkCsp_get_EncryptAlgorithmID($this->_cPtr);
+	}
+
+	function get_EncryptNumBits() {
+		return CkCsp_get_EncryptNumBits($this->_cPtr);
+	}
+
+	function get_HashAlgorithm($str) {
+		CkCsp_get_HashAlgorithm($this->_cPtr,$str);
+	}
+
+	function hashAlgorithm() {
+		return CkCsp_hashAlgorithm($this->_cPtr);
+	}
+
+	function get_HashAlgorithmID() {
+		return CkCsp_get_HashAlgorithmID($this->_cPtr);
+	}
+
+	function get_HashNumBits() {
+		return CkCsp_get_HashNumBits($this->_cPtr);
+	}
+
+	function get_KeyContainerName($str) {
+		CkCsp_get_KeyContainerName($this->_cPtr,$str);
+	}
+
+	function keyContainerName() {
+		return CkCsp_keyContainerName($this->_cPtr);
+	}
+
+	function put_KeyContainerName($newVal) {
+		CkCsp_put_KeyContainerName($this->_cPtr,$newVal);
+	}
+
+	function get_LastErrorHtml($str) {
+		CkCsp_get_LastErrorHtml($this->_cPtr,$str);
+	}
+
+	function lastErrorHtml() {
+		return CkCsp_lastErrorHtml($this->_cPtr);
+	}
+
+	function get_LastErrorText($str) {
+		CkCsp_get_LastErrorText($this->_cPtr,$str);
+	}
+
+	function lastErrorText() {
+		return CkCsp_lastErrorText($this->_cPtr);
+	}
+
+	function get_LastErrorXml($str) {
+		CkCsp_get_LastErrorXml($this->_cPtr,$str);
+	}
+
+	function lastErrorXml() {
+		return CkCsp_lastErrorXml($this->_cPtr);
+	}
+
+	function get_LastMethodSuccess() {
+		return CkCsp_get_LastMethodSuccess($this->_cPtr);
+	}
+
+	function put_LastMethodSuccess($newVal) {
+		CkCsp_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_MachineKeyset() {
+		return CkCsp_get_MachineKeyset($this->_cPtr);
+	}
+
+	function put_MachineKeyset($newVal) {
+		CkCsp_put_MachineKeyset($this->_cPtr,$newVal);
+	}
+
+	function get_NumEncryptAlgorithms() {
+		return CkCsp_get_NumEncryptAlgorithms($this->_cPtr);
+	}
+
+	function get_NumHashAlgorithms() {
+		return CkCsp_get_NumHashAlgorithms($this->_cPtr);
+	}
+
+	function get_NumKeyContainers() {
+		return CkCsp_get_NumKeyContainers($this->_cPtr);
+	}
+
+	function get_NumKeyExchangeAlgorithms() {
+		return CkCsp_get_NumKeyExchangeAlgorithms($this->_cPtr);
+	}
+
+	function get_NumSignatureAlgorithms() {
+		return CkCsp_get_NumSignatureAlgorithms($this->_cPtr);
+	}
+
+	function get_ProviderName($str) {
+		CkCsp_get_ProviderName($this->_cPtr,$str);
+	}
+
+	function providerName() {
+		return CkCsp_providerName($this->_cPtr);
+	}
+
+	function put_ProviderName($newVal) {
+		CkCsp_put_ProviderName($this->_cPtr,$newVal);
+	}
+
+	function get_ProviderType() {
+		return CkCsp_get_ProviderType($this->_cPtr);
+	}
+
+	function get_UncommonOptions($str) {
+		CkCsp_get_UncommonOptions($this->_cPtr,$str);
+	}
+
+	function uncommonOptions() {
+		return CkCsp_uncommonOptions($this->_cPtr);
+	}
+
+	function put_UncommonOptions($newVal) {
+		CkCsp_put_UncommonOptions($this->_cPtr,$newVal);
+	}
+
+	function get_VerboseLogging() {
+		return CkCsp_get_VerboseLogging($this->_cPtr);
+	}
+
+	function put_VerboseLogging($newVal) {
+		CkCsp_put_VerboseLogging($this->_cPtr,$newVal);
+	}
+
+	function get_Version($str) {
+		CkCsp_get_Version($this->_cPtr,$str);
+	}
+
+	function version() {
+		return CkCsp_version($this->_cPtr);
+	}
+
+	function GetKeyContainerNames() {
+		$r=CkCsp_GetKeyContainerNames($this->_cPtr);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkStringArray($r);
+		}
+		return $r;
+	}
+
+	function GetProviders($providerNames) {
+		return CkCsp_GetProviders($this->_cPtr,$providerNames);
+	}
+
+	function HasEncryptAlgorithm($name,$numBits) {
+		return CkCsp_HasEncryptAlgorithm($this->_cPtr,$name,$numBits);
+	}
+
+	function HasHashAlgorithm($name,$numBits) {
+		return CkCsp_HasHashAlgorithm($this->_cPtr,$name,$numBits);
+	}
+
+	function Initialize() {
+		return CkCsp_Initialize($this->_cPtr);
+	}
+
+	function nthEncryptionAlgorithm($index) {
+		return CkCsp_nthEncryptionAlgorithm($this->_cPtr,$index);
+	}
+
+	function NthEncryptionNumBits($index) {
+		return CkCsp_NthEncryptionNumBits($this->_cPtr,$index);
+	}
+
+	function nthHashAlgorithmName($index) {
+		return CkCsp_nthHashAlgorithmName($this->_cPtr,$index);
+	}
+
+	function NthHashNumBits($index) {
+		return CkCsp_NthHashNumBits($this->_cPtr,$index);
+	}
+
+	function nthKeyContainerName($index) {
+		return CkCsp_nthKeyContainerName($this->_cPtr,$index);
+	}
+
+	function nthKeyExchangeAlgorithm($index) {
+		return CkCsp_nthKeyExchangeAlgorithm($this->_cPtr,$index);
+	}
+
+	function NthKeyExchangeNumBits($index) {
+		return CkCsp_NthKeyExchangeNumBits($this->_cPtr,$index);
+	}
+
+	function nthSignatureAlgorithm($index) {
+		return CkCsp_nthSignatureAlgorithm($this->_cPtr,$index);
+	}
+
+	function NthSignatureNumBits($index) {
+		return CkCsp_NthSignatureNumBits($this->_cPtr,$index);
+	}
+
+	function SaveLastError($path) {
+		return CkCsp_SaveLastError($this->_cPtr,$path);
+	}
+
+	function SetEncryptAlgorithm($name) {
+		return CkCsp_SetEncryptAlgorithm($this->_cPtr,$name);
+	}
+
+	function SetHashAlgorithm($name) {
+		return CkCsp_SetHashAlgorithm($this->_cPtr,$name);
+	}
+}
+
+class CkCreateCS {
+	public $_cPtr=null;
+	protected $_pData=array();
+
+	function __set($var,$value) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_alter_newobject($this->_cPtr,$value);
+		$this->_pData[$var] = $value;
+	}
+
+	function __get($var) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_get_newobject($this->_cPtr);
+		return $this->_pData[$var];
+	}
+
+	function __isset($var) {
+		if ($var === 'thisown') return true;
+		return array_key_exists($var, $this->_pData);
+	}
+
+	function __construct($res=null) {
+		if (is_resource($res) && get_resource_type($res) === '_p_CkCreateCS') {
+			$this->_cPtr=$res;
+			return;
+		}
+		$this->_cPtr=new_CkCreateCS();
+	}
+
+	function get_Utf8() {
+		return CkCreateCS_get_Utf8($this->_cPtr);
+	}
+
+	function put_Utf8($b) {
+		CkCreateCS_put_Utf8($this->_cPtr,$b);
+	}
+
+	function get_DebugLogFilePath($str) {
+		CkCreateCS_get_DebugLogFilePath($this->_cPtr,$str);
+	}
+
+	function debugLogFilePath() {
+		return CkCreateCS_debugLogFilePath($this->_cPtr);
+	}
+
+	function put_DebugLogFilePath($newVal) {
+		CkCreateCS_put_DebugLogFilePath($this->_cPtr,$newVal);
+	}
+
+	function get_LastErrorHtml($str) {
+		CkCreateCS_get_LastErrorHtml($this->_cPtr,$str);
+	}
+
+	function lastErrorHtml() {
+		return CkCreateCS_lastErrorHtml($this->_cPtr);
+	}
+
+	function get_LastErrorText($str) {
+		CkCreateCS_get_LastErrorText($this->_cPtr,$str);
+	}
+
+	function lastErrorText() {
+		return CkCreateCS_lastErrorText($this->_cPtr);
+	}
+
+	function get_LastErrorXml($str) {
+		CkCreateCS_get_LastErrorXml($this->_cPtr,$str);
+	}
+
+	function lastErrorXml() {
+		return CkCreateCS_lastErrorXml($this->_cPtr);
+	}
+
+	function get_LastMethodSuccess() {
+		return CkCreateCS_get_LastMethodSuccess($this->_cPtr);
+	}
+
+	function put_LastMethodSuccess($newVal) {
+		CkCreateCS_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_ReadOnly() {
+		return CkCreateCS_get_ReadOnly($this->_cPtr);
+	}
+
+	function put_ReadOnly($newVal) {
+		CkCreateCS_put_ReadOnly($this->_cPtr,$newVal);
+	}
+
+	function get_VerboseLogging() {
+		return CkCreateCS_get_VerboseLogging($this->_cPtr);
+	}
+
+	function put_VerboseLogging($newVal) {
+		CkCreateCS_put_VerboseLogging($this->_cPtr,$newVal);
+	}
+
+	function get_Version($str) {
+		CkCreateCS_get_Version($this->_cPtr,$str);
+	}
+
+	function version() {
+		return CkCreateCS_version($this->_cPtr);
+	}
+
+	function CreateFileStore($path) {
+		$r=CkCreateCS_CreateFileStore($this->_cPtr,$path);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function CreateMemoryStore() {
+		$r=CkCreateCS_CreateMemoryStore($this->_cPtr);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function CreateRegistryStore($regRoot,$regPath) {
+		$r=CkCreateCS_CreateRegistryStore($this->_cPtr,$regRoot,$regPath);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function OpenChilkatStore() {
+		$r=CkCreateCS_OpenChilkatStore($this->_cPtr);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function OpenCurrentUserStore() {
+		$r=CkCreateCS_OpenCurrentUserStore($this->_cPtr);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function OpenFileStore($path) {
+		$r=CkCreateCS_OpenFileStore($this->_cPtr,$path);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function OpenLocalSystemStore() {
+		$r=CkCreateCS_OpenLocalSystemStore($this->_cPtr);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function OpenOutlookStore() {
+		$r=CkCreateCS_OpenOutlookStore($this->_cPtr);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function OpenRegistryStore($regRoot,$regPath) {
+		$r=CkCreateCS_OpenRegistryStore($this->_cPtr,$regRoot,$regPath);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkCertStore($r);
+		}
+		return $r;
+	}
+
+	function SaveLastError($path) {
+		return CkCreateCS_SaveLastError($this->_cPtr,$path);
+	}
+}
+
+class CkKeyContainer {
+	public $_cPtr=null;
+	protected $_pData=array();
+
+	function __set($var,$value) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_alter_newobject($this->_cPtr,$value);
+		$this->_pData[$var] = $value;
+	}
+
+	function __get($var) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_get_newobject($this->_cPtr);
+		return $this->_pData[$var];
+	}
+
+	function __isset($var) {
+		if ($var === 'thisown') return true;
+		return array_key_exists($var, $this->_pData);
+	}
+
+	function __construct($res=null) {
+		if (is_resource($res) && get_resource_type($res) === '_p_CkKeyContainer') {
+			$this->_cPtr=$res;
+			return;
+		}
+		$this->_cPtr=new_CkKeyContainer();
+	}
+
+	function get_Utf8() {
+		return CkKeyContainer_get_Utf8($this->_cPtr);
+	}
+
+	function put_Utf8($b) {
+		CkKeyContainer_put_Utf8($this->_cPtr,$b);
+	}
+
+	function get_ContainerName($str) {
+		CkKeyContainer_get_ContainerName($this->_cPtr,$str);
+	}
+
+	function containerName() {
+		return CkKeyContainer_containerName($this->_cPtr);
+	}
+
+	function get_DebugLogFilePath($str) {
+		CkKeyContainer_get_DebugLogFilePath($this->_cPtr,$str);
+	}
+
+	function debugLogFilePath() {
+		return CkKeyContainer_debugLogFilePath($this->_cPtr);
+	}
+
+	function put_DebugLogFilePath($newVal) {
+		CkKeyContainer_put_DebugLogFilePath($this->_cPtr,$newVal);
+	}
+
+	function get_IsMachineKeyset() {
+		return CkKeyContainer_get_IsMachineKeyset($this->_cPtr);
+	}
+
+	function get_IsOpen() {
+		return CkKeyContainer_get_IsOpen($this->_cPtr);
+	}
+
+	function get_LastErrorHtml($str) {
+		CkKeyContainer_get_LastErrorHtml($this->_cPtr,$str);
+	}
+
+	function lastErrorHtml() {
+		return CkKeyContainer_lastErrorHtml($this->_cPtr);
+	}
+
+	function get_LastErrorText($str) {
+		CkKeyContainer_get_LastErrorText($this->_cPtr,$str);
+	}
+
+	function lastErrorText() {
+		return CkKeyContainer_lastErrorText($this->_cPtr);
+	}
+
+	function get_LastErrorXml($str) {
+		CkKeyContainer_get_LastErrorXml($this->_cPtr,$str);
+	}
+
+	function lastErrorXml() {
+		return CkKeyContainer_lastErrorXml($this->_cPtr);
+	}
+
+	function get_LastMethodSuccess() {
+		return CkKeyContainer_get_LastMethodSuccess($this->_cPtr);
+	}
+
+	function put_LastMethodSuccess($newVal) {
+		CkKeyContainer_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_LegacyKeySpec() {
+		return CkKeyContainer_get_LegacyKeySpec($this->_cPtr);
+	}
+
+	function put_LegacyKeySpec($newVal) {
+		CkKeyContainer_put_LegacyKeySpec($this->_cPtr,$newVal);
+	}
+
+	function get_MachineKeys() {
+		return CkKeyContainer_get_MachineKeys($this->_cPtr);
+	}
+
+	function put_MachineKeys($newVal) {
+		CkKeyContainer_put_MachineKeys($this->_cPtr,$newVal);
+	}
+
+	function get_VerboseLogging() {
+		return CkKeyContainer_get_VerboseLogging($this->_cPtr);
+	}
+
+	function put_VerboseLogging($newVal) {
+		CkKeyContainer_put_VerboseLogging($this->_cPtr,$newVal);
+	}
+
+	function get_Version($str) {
+		CkKeyContainer_get_Version($this->_cPtr,$str);
+	}
+
+	function version() {
+		return CkKeyContainer_version($this->_cPtr);
+	}
+
+	function CloseContainer() {
+		CkKeyContainer_CloseContainer($this->_cPtr);
+	}
+
+	function CreateContainer($name,$machineKeyset) {
+		return CkKeyContainer_CreateContainer($this->_cPtr,$name,$machineKeyset);
+	}
+
+	function DeleteContainer() {
+		return CkKeyContainer_DeleteContainer($this->_cPtr);
+	}
+
+	function DeleteKey($keyName,$storageProvider) {
+		return CkKeyContainer_DeleteKey($this->_cPtr,$keyName,$storageProvider);
+	}
+
+	function ExportKey($keyName,$storageProvider,$silentFlag,$key) {
+		return CkKeyContainer_ExportKey($this->_cPtr,$keyName,$storageProvider,$silentFlag,$key);
+	}
+
+	function FetchContainerNames($bMachineKeyset) {
+		return CkKeyContainer_FetchContainerNames($this->_cPtr,$bMachineKeyset);
+	}
+
+	function GenerateKeyPair($bKeyExchangePair,$keyLengthInBits) {
+		return CkKeyContainer_GenerateKeyPair($this->_cPtr,$bKeyExchangePair,$keyLengthInBits);
+	}
+
+	function generateUuid() {
+		return CkKeyContainer_generateUuid($this->_cPtr);
+	}
+
+	function GetKeys($storageProvider,$json) {
+		return CkKeyContainer_GetKeys($this->_cPtr,$storageProvider,$json);
+	}
+
+	function getNthContainerName($bMachineKeyset,$index) {
+		return CkKeyContainer_getNthContainerName($this->_cPtr,$bMachineKeyset,$index);
+	}
+
+	function nthContainerName($bMachineKeyset,$index) {
+		return CkKeyContainer_nthContainerName($this->_cPtr,$bMachineKeyset,$index);
+	}
+
+	function GetNumContainers($bMachineKeyset) {
+		return CkKeyContainer_GetNumContainers($this->_cPtr,$bMachineKeyset);
+	}
+
+	function GetPrivateKey($bKeyExchangePair) {
+		$r=CkKeyContainer_GetPrivateKey($this->_cPtr,$bKeyExchangePair);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkPrivateKey($r);
+		}
+		return $r;
+	}
+
+	function GetPublicKey($bKeyExchangePair) {
+		$r=CkKeyContainer_GetPublicKey($this->_cPtr,$bKeyExchangePair);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkPublicKey($r);
+		}
+		return $r;
+	}
+
+	function GetStorageProviders($json) {
+		return CkKeyContainer_GetStorageProviders($this->_cPtr,$json);
+	}
+
+	function ImportKey($keyName,$storageProvider,$allowOverwrite,$allowExport,$key) {
+		return CkKeyContainer_ImportKey($this->_cPtr,$keyName,$storageProvider,$allowOverwrite,$allowExport,$key);
+	}
+
+	function ImportPrivateKey($key,$bKeyExchangePair) {
+		return CkKeyContainer_ImportPrivateKey($this->_cPtr,$key,$bKeyExchangePair);
+	}
+
+	function ImportPublicKey($key,$bKeyExchangePair) {
+		return CkKeyContainer_ImportPublicKey($this->_cPtr,$key,$bKeyExchangePair);
+	}
+
+	function OpenContainer($name,$needPrivateKeyAccess,$machineKeyset) {
+		return CkKeyContainer_OpenContainer($this->_cPtr,$name,$needPrivateKeyAccess,$machineKeyset);
+	}
+
+	function SaveLastError($path) {
+		return CkKeyContainer_SaveLastError($this->_cPtr,$path);
+	}
+}
+
 class CkPdf {
 	public $_cPtr=null;
 	protected $_pData=array();
@@ -42529,6 +43875,10 @@ class CkPdf {
 		CkPdf_put_DebugLogFilePath($this->_cPtr,$newVal);
 	}
 
+	function get_HasCertificationSig() {
+		return CkPdf_get_HasCertificationSig($this->_cPtr);
+	}
+
 	function get_LastErrorHtml($str) {
 		CkPdf_get_LastErrorHtml($this->_cPtr,$str);
 	}
@@ -42559,6 +43909,10 @@ class CkPdf {
 
 	function put_LastMethodSuccess($newVal) {
 		CkPdf_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_NumEmbeddedFiles() {
+		return CkPdf_get_NumEmbeddedFiles($this->_cPtr);
 	}
 
 	function get_NumPages() {
@@ -42605,6 +43959,14 @@ class CkPdf {
 		return CkPdf_version($this->_cPtr);
 	}
 
+	function AddEmbeddedFiles($json,$outFilePath) {
+		return CkPdf_AddEmbeddedFiles($this->_cPtr,$json,$outFilePath);
+	}
+
+	function AddEmbeddedFilesBd($json,$bd) {
+		return CkPdf_AddEmbeddedFilesBd($this->_cPtr,$json,$bd);
+	}
+
 	function AddSigningCert($cert) {
 		return CkPdf_AddSigningCert($this->_cPtr,$cert);
 	}
@@ -42625,6 +43987,14 @@ class CkPdf {
 
 	function GetDss($json) {
 		return CkPdf_GetDss($this->_cPtr,$json);
+	}
+
+	function GetEmbeddedFileBd($index,$bd) {
+		return CkPdf_GetEmbeddedFileBd($this->_cPtr,$index,$bd);
+	}
+
+	function GetEmbeddedFileInfo($index,$json) {
+		return CkPdf_GetEmbeddedFileInfo($this->_cPtr,$index,$json);
 	}
 
 	function GetMetadata($sb) {
@@ -42687,6 +44057,20 @@ class CkPdf {
 
 	function SignPdfAsync($jsonOptions,$outFilePath) {
 		$r=CkPdf_SignPdfAsync($this->_cPtr,$jsonOptions,$outFilePath);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
+	function SignPdfBd($jsonOptions,$bd) {
+		return CkPdf_SignPdfBd($this->_cPtr,$jsonOptions,$bd);
+	}
+
+	function SignPdfBdAsync($jsonOptions,$bd) {
+		$r=CkPdf_SignPdfBdAsync($this->_cPtr,$jsonOptions,$bd);
 		if (is_resource($r)) {
 			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
 			if (class_exists($c)) return new $c($r);
@@ -43053,6 +44437,18 @@ class CkPkcs11 {
 		CkPkcs11_put_SharedLibPath($this->_cPtr,$newVal);
 	}
 
+	function get_SigContextPin($str) {
+		CkPkcs11_get_SigContextPin($this->_cPtr,$str);
+	}
+
+	function sigContextPin() {
+		return CkPkcs11_sigContextPin($this->_cPtr);
+	}
+
+	function put_SigContextPin($newVal) {
+		CkPkcs11_put_SigContextPin($this->_cPtr,$newVal);
+	}
+
 	function get_VerboseLogging() {
 		return CkPkcs11_get_VerboseLogging($this->_cPtr);
 	}
@@ -43073,20 +44469,60 @@ class CkPkcs11 {
 		return CkPkcs11_CloseSession($this->_cPtr);
 	}
 
+	function CreatePkcs11Object($attrs) {
+		return CkPkcs11_CreatePkcs11Object($this->_cPtr,$attrs);
+	}
+
+	function DestroyObject($hObject) {
+		return CkPkcs11_DestroyObject($this->_cPtr,$hObject);
+	}
+
 	function Discover($onlyTokensPresent,$json) {
 		return CkPkcs11_Discover($this->_cPtr,$onlyTokensPresent,$json);
+	}
+
+	function ExportPublicKey($keyHandle,$pubKey) {
+		return CkPkcs11_ExportPublicKey($this->_cPtr,$keyHandle,$pubKey);
 	}
 
 	function FindAllCerts() {
 		return CkPkcs11_FindAllCerts($this->_cPtr);
 	}
 
+	function FindAllKeys($keyClass,$json) {
+		return CkPkcs11_FindAllKeys($this->_cPtr,$keyClass,$json);
+	}
+
 	function FindCert($certPart,$partValue,$cert) {
 		return CkPkcs11_FindCert($this->_cPtr,$certPart,$partValue,$cert);
 	}
 
+	function FindObject($jsonTemplate) {
+		return CkPkcs11_FindObject($this->_cPtr,$jsonTemplate);
+	}
+
+	function GenEcKey($publicAttrs,$privateAttrs,$jsonOut,$pubKey) {
+		return CkPkcs11_GenEcKey($this->_cPtr,$publicAttrs,$privateAttrs,$jsonOut,$pubKey);
+	}
+
+	function GenRsaKey($publicAttrs,$privateAttrs,$jsonOut,$pubKey) {
+		return CkPkcs11_GenRsaKey($this->_cPtr,$publicAttrs,$privateAttrs,$jsonOut,$pubKey);
+	}
+
+	function GenSecretKey($keyType,$jsonTemplate) {
+		return CkPkcs11_GenSecretKey($this->_cPtr,$keyType,$jsonTemplate);
+	}
+
 	function GetCert($index,$cert) {
 		return CkPkcs11_GetCert($this->_cPtr,$index,$cert);
+	}
+
+	function ImportPrivateKey($privKey,$jsonTemplate) {
+		return CkPkcs11_ImportPrivateKey($this->_cPtr,$privKey,$jsonTemplate);
+	}
+
+	function ImportSshKey($sshKey,$jsonTemplate) {
+		return CkPkcs11_ImportSshKey($this->_cPtr,$sshKey,$jsonTemplate);
 	}
 
 	function Initialize() {
@@ -43113,12 +44549,576 @@ class CkPkcs11 {
 		return CkPkcs11_OpenSession($this->_cPtr,$slotId,$readWrite);
 	}
 
+	function QuickSession($userType,$pin) {
+		return CkPkcs11_QuickSession($this->_cPtr,$userType,$pin);
+	}
+
 	function SaveLastError($path) {
 		return CkPkcs11_SaveLastError($this->_cPtr,$path);
 	}
 
 	function SetPin($oldPin,$newPin) {
 		return CkPkcs11_SetPin($this->_cPtr,$oldPin,$newPin);
+	}
+}
+
+class CkScMinidriver {
+	public $_cPtr=null;
+	protected $_pData=array();
+
+	function __set($var,$value) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_alter_newobject($this->_cPtr,$value);
+		$this->_pData[$var] = $value;
+	}
+
+	function __get($var) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_get_newobject($this->_cPtr);
+		return $this->_pData[$var];
+	}
+
+	function __isset($var) {
+		if ($var === 'thisown') return true;
+		return array_key_exists($var, $this->_pData);
+	}
+
+	function __construct($res=null) {
+		if (is_resource($res) && get_resource_type($res) === '_p_CkScMinidriver') {
+			$this->_cPtr=$res;
+			return;
+		}
+		$this->_cPtr=new_CkScMinidriver();
+	}
+
+	function get_Utf8() {
+		return CkScMinidriver_get_Utf8($this->_cPtr);
+	}
+
+	function put_Utf8($b) {
+		CkScMinidriver_put_Utf8($this->_cPtr,$b);
+	}
+
+	function get_Atr($str) {
+		CkScMinidriver_get_Atr($this->_cPtr,$str);
+	}
+
+	function atr() {
+		return CkScMinidriver_atr($this->_cPtr);
+	}
+
+	function get_CardName($str) {
+		CkScMinidriver_get_CardName($this->_cPtr,$str);
+	}
+
+	function cardName() {
+		return CkScMinidriver_cardName($this->_cPtr);
+	}
+
+	function get_DebugLogFilePath($str) {
+		CkScMinidriver_get_DebugLogFilePath($this->_cPtr,$str);
+	}
+
+	function debugLogFilePath() {
+		return CkScMinidriver_debugLogFilePath($this->_cPtr);
+	}
+
+	function put_DebugLogFilePath($newVal) {
+		CkScMinidriver_put_DebugLogFilePath($this->_cPtr,$newVal);
+	}
+
+	function get_LastErrorHtml($str) {
+		CkScMinidriver_get_LastErrorHtml($this->_cPtr,$str);
+	}
+
+	function lastErrorHtml() {
+		return CkScMinidriver_lastErrorHtml($this->_cPtr);
+	}
+
+	function get_LastErrorText($str) {
+		CkScMinidriver_get_LastErrorText($this->_cPtr,$str);
+	}
+
+	function lastErrorText() {
+		return CkScMinidriver_lastErrorText($this->_cPtr);
+	}
+
+	function get_LastErrorXml($str) {
+		CkScMinidriver_get_LastErrorXml($this->_cPtr,$str);
+	}
+
+	function lastErrorXml() {
+		return CkScMinidriver_lastErrorXml($this->_cPtr);
+	}
+
+	function get_LastMethodSuccess() {
+		return CkScMinidriver_get_LastMethodSuccess($this->_cPtr);
+	}
+
+	function put_LastMethodSuccess($newVal) {
+		CkScMinidriver_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_MaxContainers() {
+		return CkScMinidriver_get_MaxContainers($this->_cPtr);
+	}
+
+	function get_RsaPaddingHash($str) {
+		CkScMinidriver_get_RsaPaddingHash($this->_cPtr,$str);
+	}
+
+	function rsaPaddingHash() {
+		return CkScMinidriver_rsaPaddingHash($this->_cPtr);
+	}
+
+	function put_RsaPaddingHash($newVal) {
+		CkScMinidriver_put_RsaPaddingHash($this->_cPtr,$newVal);
+	}
+
+	function get_RsaPaddingScheme($str) {
+		CkScMinidriver_get_RsaPaddingScheme($this->_cPtr,$str);
+	}
+
+	function rsaPaddingScheme() {
+		return CkScMinidriver_rsaPaddingScheme($this->_cPtr);
+	}
+
+	function put_RsaPaddingScheme($newVal) {
+		CkScMinidriver_put_RsaPaddingScheme($this->_cPtr,$newVal);
+	}
+
+	function get_UncommonOptions($str) {
+		CkScMinidriver_get_UncommonOptions($this->_cPtr,$str);
+	}
+
+	function uncommonOptions() {
+		return CkScMinidriver_uncommonOptions($this->_cPtr);
+	}
+
+	function put_UncommonOptions($newVal) {
+		CkScMinidriver_put_UncommonOptions($this->_cPtr,$newVal);
+	}
+
+	function get_VerboseLogging() {
+		return CkScMinidriver_get_VerboseLogging($this->_cPtr);
+	}
+
+	function put_VerboseLogging($newVal) {
+		CkScMinidriver_put_VerboseLogging($this->_cPtr,$newVal);
+	}
+
+	function get_Version($str) {
+		CkScMinidriver_get_Version($this->_cPtr,$str);
+	}
+
+	function version() {
+		return CkScMinidriver_version($this->_cPtr);
+	}
+
+	function AcquireContext($readerName) {
+		return CkScMinidriver_AcquireContext($this->_cPtr,$readerName);
+	}
+
+	function CardDeleteFile($dirName,$fileName) {
+		return CkScMinidriver_CardDeleteFile($this->_cPtr,$dirName,$fileName);
+	}
+
+	function DeleteCert($cert,$delPrivKey) {
+		return CkScMinidriver_DeleteCert($this->_cPtr,$cert,$delPrivKey);
+	}
+
+	function DeleteContext() {
+		return CkScMinidriver_DeleteContext($this->_cPtr);
+	}
+
+	function DeleteKeyContainer($containerIndex) {
+		return CkScMinidriver_DeleteKeyContainer($this->_cPtr,$containerIndex);
+	}
+
+	function EnumFiles($dirName,$st) {
+		return CkScMinidriver_EnumFiles($this->_cPtr,$dirName,$st);
+	}
+
+	function FindCert($certPart,$partValue,$cert) {
+		return CkScMinidriver_FindCert($this->_cPtr,$certPart,$partValue,$cert);
+	}
+
+	function GenerateKey($containerIndex,$keySpec,$keyType,$keySize,$pinId) {
+		return CkScMinidriver_GenerateKey($this->_cPtr,$containerIndex,$keySpec,$keyType,$keySize,$pinId);
+	}
+
+	function GetCardProperties($json) {
+		return CkScMinidriver_GetCardProperties($this->_cPtr,$json);
+	}
+
+	function GetCert($containerIndex,$keySpec,$cert) {
+		return CkScMinidriver_GetCert($this->_cPtr,$containerIndex,$keySpec,$cert);
+	}
+
+	function GetContainerKeys($containerIndex,$sigKey,$kexKey) {
+		return CkScMinidriver_GetContainerKeys($this->_cPtr,$containerIndex,$sigKey,$kexKey);
+	}
+
+	function GetCspContainerMap($json) {
+		return CkScMinidriver_GetCspContainerMap($this->_cPtr,$json);
+	}
+
+	function ImportCert($cert,$containerIndex,$keySpec,$pinId) {
+		return CkScMinidriver_ImportCert($this->_cPtr,$cert,$containerIndex,$keySpec,$pinId);
+	}
+
+	function ImportKey($containerIndex,$keySpec,$privKey,$pinId) {
+		return CkScMinidriver_ImportKey($this->_cPtr,$containerIndex,$keySpec,$privKey,$pinId);
+	}
+
+	function ListCerts($certPart,$st) {
+		return CkScMinidriver_ListCerts($this->_cPtr,$certPart,$st);
+	}
+
+	function PinAuthenticate($pinId,$pin) {
+		return CkScMinidriver_PinAuthenticate($this->_cPtr,$pinId,$pin);
+	}
+
+	function PinAuthenticateHex($pinId,$pin) {
+		return CkScMinidriver_PinAuthenticateHex($this->_cPtr,$pinId,$pin);
+	}
+
+	function PinChange($pinId,$currentPin,$newPin) {
+		return CkScMinidriver_PinChange($this->_cPtr,$pinId,$currentPin,$newPin);
+	}
+
+	function PinDeauthenticate($pinId) {
+		return CkScMinidriver_PinDeauthenticate($this->_cPtr,$pinId);
+	}
+
+	function ReadFile($dirName,$fileName,$bd) {
+		return CkScMinidriver_ReadFile($this->_cPtr,$dirName,$fileName,$bd);
+	}
+
+	function SaveLastError($path) {
+		return CkScMinidriver_SaveLastError($this->_cPtr,$path);
+	}
+
+	function SignData($containerIndex,$keySpec,$hashDataAlg,$bdData,$bdSignedData) {
+		return CkScMinidriver_SignData($this->_cPtr,$containerIndex,$keySpec,$hashDataAlg,$bdData,$bdSignedData);
+	}
+
+	function WriteFile($dirName,$fileName,$bd) {
+		return CkScMinidriver_WriteFile($this->_cPtr,$dirName,$fileName,$bd);
+	}
+}
+
+class CkDns {
+	public $_cPtr=null;
+	protected $_pData=array();
+
+	function __set($var,$value) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_alter_newobject($this->_cPtr,$value);
+		$this->_pData[$var] = $value;
+	}
+
+	function __get($var) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_get_newobject($this->_cPtr);
+		return $this->_pData[$var];
+	}
+
+	function __isset($var) {
+		if ($var === 'thisown') return true;
+		return array_key_exists($var, $this->_pData);
+	}
+
+	function __construct($res=null) {
+		if (is_resource($res) && get_resource_type($res) === '_p_CkDns') {
+			$this->_cPtr=$res;
+			return;
+		}
+		$this->_cPtr=new_CkDns();
+	}
+
+	function get_Utf8() {
+		return CkDns_get_Utf8($this->_cPtr);
+	}
+
+	function put_Utf8($b) {
+		CkDns_put_Utf8($this->_cPtr,$b);
+	}
+
+	function put_EventCallbackObject($progress) {
+		CkDns_put_EventCallbackObject($this->_cPtr,$progress);
+	}
+
+	function get_DebugLogFilePath($str) {
+		CkDns_get_DebugLogFilePath($this->_cPtr,$str);
+	}
+
+	function debugLogFilePath() {
+		return CkDns_debugLogFilePath($this->_cPtr);
+	}
+
+	function put_DebugLogFilePath($newVal) {
+		CkDns_put_DebugLogFilePath($this->_cPtr,$newVal);
+	}
+
+	function get_HeartbeatMs() {
+		return CkDns_get_HeartbeatMs($this->_cPtr);
+	}
+
+	function put_HeartbeatMs($newVal) {
+		CkDns_put_HeartbeatMs($this->_cPtr,$newVal);
+	}
+
+	function get_LastErrorHtml($str) {
+		CkDns_get_LastErrorHtml($this->_cPtr,$str);
+	}
+
+	function lastErrorHtml() {
+		return CkDns_lastErrorHtml($this->_cPtr);
+	}
+
+	function get_LastErrorText($str) {
+		CkDns_get_LastErrorText($this->_cPtr,$str);
+	}
+
+	function lastErrorText() {
+		return CkDns_lastErrorText($this->_cPtr);
+	}
+
+	function get_LastErrorXml($str) {
+		CkDns_get_LastErrorXml($this->_cPtr,$str);
+	}
+
+	function lastErrorXml() {
+		return CkDns_lastErrorXml($this->_cPtr);
+	}
+
+	function get_LastMethodSuccess() {
+		return CkDns_get_LastMethodSuccess($this->_cPtr);
+	}
+
+	function put_LastMethodSuccess($newVal) {
+		CkDns_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_MaxWaitMs() {
+		return CkDns_get_MaxWaitMs($this->_cPtr);
+	}
+
+	function put_MaxWaitMs($newVal) {
+		CkDns_put_MaxWaitMs($this->_cPtr,$newVal);
+	}
+
+	function get_NumNameservers() {
+		return CkDns_get_NumNameservers($this->_cPtr);
+	}
+
+	function get_TlsPref() {
+		return CkDns_get_TlsPref($this->_cPtr);
+	}
+
+	function put_TlsPref($newVal) {
+		CkDns_put_TlsPref($this->_cPtr,$newVal);
+	}
+
+	function get_VerboseLogging() {
+		return CkDns_get_VerboseLogging($this->_cPtr);
+	}
+
+	function put_VerboseLogging($newVal) {
+		CkDns_put_VerboseLogging($this->_cPtr,$newVal);
+	}
+
+	function get_Version($str) {
+		CkDns_get_Version($this->_cPtr,$str);
+	}
+
+	function version() {
+		return CkDns_version($this->_cPtr);
+	}
+
+	function AddDefaultNameservers() {
+		CkDns_AddDefaultNameservers($this->_cPtr);
+	}
+
+	function AddNameserver($ipAddr,$supportsTls) {
+		CkDns_AddNameserver($this->_cPtr,$ipAddr,$supportsTls);
+	}
+
+	function getNameserver($index) {
+		return CkDns_getNameserver($this->_cPtr,$index);
+	}
+
+	function nameserver($index) {
+		return CkDns_nameserver($this->_cPtr,$index);
+	}
+
+	function Query($recordType,$domain,$answer) {
+		return CkDns_Query($this->_cPtr,$recordType,$domain,$answer);
+	}
+
+	function QueryAsync($recordType,$domain,$answer) {
+		$r=CkDns_QueryAsync($this->_cPtr,$recordType,$domain,$answer);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
+	function RemoveAllNameservers() {
+		CkDns_RemoveAllNameservers($this->_cPtr);
+	}
+
+	function RemoveNameserver($ipAddr) {
+		CkDns_RemoveNameserver($this->_cPtr,$ipAddr);
+	}
+
+	function SaveLastError($path) {
+		return CkDns_SaveLastError($this->_cPtr,$path);
+	}
+}
+
+class CkCodeSign {
+	public $_cPtr=null;
+	protected $_pData=array();
+
+	function __set($var,$value) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_alter_newobject($this->_cPtr,$value);
+		$this->_pData[$var] = $value;
+	}
+
+	function __get($var) {
+		if ($var === 'thisown') return swig_chilkat_9_5_0_get_newobject($this->_cPtr);
+		return $this->_pData[$var];
+	}
+
+	function __isset($var) {
+		if ($var === 'thisown') return true;
+		return array_key_exists($var, $this->_pData);
+	}
+
+	function __construct($res=null) {
+		if (is_resource($res) && get_resource_type($res) === '_p_CkCodeSign') {
+			$this->_cPtr=$res;
+			return;
+		}
+		$this->_cPtr=new_CkCodeSign();
+	}
+
+	function get_Utf8() {
+		return CkCodeSign_get_Utf8($this->_cPtr);
+	}
+
+	function put_Utf8($b) {
+		CkCodeSign_put_Utf8($this->_cPtr,$b);
+	}
+
+	function put_EventCallbackObject($progress) {
+		CkCodeSign_put_EventCallbackObject($this->_cPtr,$progress);
+	}
+
+	function get_DebugLogFilePath($str) {
+		CkCodeSign_get_DebugLogFilePath($this->_cPtr,$str);
+	}
+
+	function debugLogFilePath() {
+		return CkCodeSign_debugLogFilePath($this->_cPtr);
+	}
+
+	function put_DebugLogFilePath($newVal) {
+		CkCodeSign_put_DebugLogFilePath($this->_cPtr,$newVal);
+	}
+
+	function get_HeartbeatMs() {
+		return CkCodeSign_get_HeartbeatMs($this->_cPtr);
+	}
+
+	function put_HeartbeatMs($newVal) {
+		CkCodeSign_put_HeartbeatMs($this->_cPtr,$newVal);
+	}
+
+	function get_LastErrorHtml($str) {
+		CkCodeSign_get_LastErrorHtml($this->_cPtr,$str);
+	}
+
+	function lastErrorHtml() {
+		return CkCodeSign_lastErrorHtml($this->_cPtr);
+	}
+
+	function get_LastErrorText($str) {
+		CkCodeSign_get_LastErrorText($this->_cPtr,$str);
+	}
+
+	function lastErrorText() {
+		return CkCodeSign_lastErrorText($this->_cPtr);
+	}
+
+	function get_LastErrorXml($str) {
+		CkCodeSign_get_LastErrorXml($this->_cPtr,$str);
+	}
+
+	function lastErrorXml() {
+		return CkCodeSign_lastErrorXml($this->_cPtr);
+	}
+
+	function get_LastMethodSuccess() {
+		return CkCodeSign_get_LastMethodSuccess($this->_cPtr);
+	}
+
+	function put_LastMethodSuccess($newVal) {
+		CkCodeSign_put_LastMethodSuccess($this->_cPtr,$newVal);
+	}
+
+	function get_UncommonOptions($str) {
+		CkCodeSign_get_UncommonOptions($this->_cPtr,$str);
+	}
+
+	function uncommonOptions() {
+		return CkCodeSign_uncommonOptions($this->_cPtr);
+	}
+
+	function put_UncommonOptions($newVal) {
+		CkCodeSign_put_UncommonOptions($this->_cPtr,$newVal);
+	}
+
+	function get_VerboseLogging() {
+		return CkCodeSign_get_VerboseLogging($this->_cPtr);
+	}
+
+	function put_VerboseLogging($newVal) {
+		CkCodeSign_put_VerboseLogging($this->_cPtr,$newVal);
+	}
+
+	function get_Version($str) {
+		CkCodeSign_get_Version($this->_cPtr,$str);
+	}
+
+	function version() {
+		return CkCodeSign_version($this->_cPtr);
+	}
+
+	function AddSignature($path,$cert,$options) {
+		return CkCodeSign_AddSignature($this->_cPtr,$path,$cert,$options);
+	}
+
+	function AddSignatureAsync($path,$cert,$options) {
+		$r=CkCodeSign_AddSignatureAsync($this->_cPtr,$path,$cert,$options);
+		if (is_resource($r)) {
+			$c=substr(get_resource_type($r), (strpos(get_resource_type($r), '__') ? strpos(get_resource_type($r), '__') + 2 : 3));
+			if (class_exists($c)) return new $c($r);
+			return new CkTask($r);
+		}
+		return $r;
+	}
+
+	function RemoveSignature($path) {
+		return CkCodeSign_RemoveSignature($this->_cPtr,$path);
+	}
+
+	function SaveLastError($path) {
+		return CkCodeSign_SaveLastError($this->_cPtr,$path);
+	}
+
+	function VerifySignature($path,$sigInfo) {
+		return CkCodeSign_VerifySignature($this->_cPtr,$path,$sigInfo);
 	}
 }
 
